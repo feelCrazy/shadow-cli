@@ -1,0 +1,24 @@
+{
+  "name": "shadow-cli",
+  "version": "0.0.1",
+  "description": "test cli",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "keywords": [
+    "node"
+  ],
+  "author": "ming",
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "^2.4.1",
+    "figlet": "^1.2.0",
+    "inquirer": "^6.2.0",
+    "shelljs": "^0.8.2"
+  },
+  "bin": {
+    "shadow": "./index.js"
+  }
+}
