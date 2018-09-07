@@ -2,10 +2,15 @@
 
 'use strict';
 
-const inquirer = require("inquirer");
+// const inquirer = require("inquirer");
 const chalk = require("chalk");
 const figlet = require("figlet");
 const shell = require("shelljs");
+const program = require('commander');
+const fs = require('fs')
+const symbols = require('log-symbols');
+
+const Creator = require('./lib/Creator')
 
 var currentNodeVersion = process.versions.node;
 var semver = currentNodeVersion.split('.');
@@ -13,76 +18,47 @@ var major = semver[0];
 
 
 const init = () => {
-    console.log(
-        chalk.green(
-            figlet.textSync("Shadow CLI", {
-                font: "Ghost",
-                horizontalLayout: "default",
-                verticalLayout: "default",
-            })
-        )
-    );
-};
+  console.log(
+    chalk.green(
+      figlet.textSync("Shadow CLI", {
+        font: "Ghost",
+        horizontalLayout: "default",
+        verticalLayout: "default",
+      })
+    )
+  );
 
-const askQuestions = () => {
-    const questions = [{
-            name: "FILENAME",
-            type: "input",
-            message: "What is the name of the file without extension?"
-        },
-        {
-            type: "list",
-            name: "EXTENSION",
-            message: "What is the file extension?",
-            choices: [".rb", ".js", ".php", ".css"],
-            filter: function (val) {
-                return val.split(".")[1];
-            }
-        }
-    ];
-    return inquirer.prompt(questions);
-};
-
-const createFile = (filename, extension) => {
-    const filePath = `${process.cwd()}/${filename}.${extension}`
-    shell.touch(filePath);
-    return filePath;
-};
-
-const success = filepath => {
-    console.log(
-        chalk.white.bgGreen.bold(`Done! File created at ${filepath}`)
-    );
-};
-
-const run = async () => {
-    // show script introduction
-    init();
-
-    // ask questions
-    const answers = await askQuestions();
-    const {
-        FILENAME,
-        EXTENSION
-    } = answers;
-
-    // create the file
-    const filePath = createFile(FILENAME, EXTENSION);
-
-    // show success message
-    success(filePath);
-};
-
-if (major < 4) {
+  if (major < 8) {
     console.error(
-        chalk.red(
-            'You are running Node ' +
-            currentNodeVersion +
-            '.\n' +
-            'Create React App requires Node 4 or higher. \n' +
-            'Please update your version of Node.'
-        )
+      chalk.red(
+        'You are running Node ' +
+        currentNodeVersion +
+        '.\n' +
+        'Create React App requires Node 4 or higher. \n' +
+        'Please update your version of Node.'
+      )
     );
     process.exit(1);
-}
-run();
+  }
+};
+
+init()
+program
+  .version(require('./package.json').version, '-v, --version')
+  .usage('<command> [options]')
+
+program
+  .command('init <app-name>')
+  .description('create a new project powered by')
+  .option('-p, --peper', 'test1')
+  .action((packageName, options) => {
+    if (!fs.existsSync(packageName)) {
+      const create = new Creator(packageName)
+      create.create()
+    } else {
+      console.log(symbols.error, chalk.red('项目：' + packageName + " 已存在"));
+    }
+
+  })
+
+program.parse(process.argv)

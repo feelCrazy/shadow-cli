@@ -17,6 +17,7 @@
     "commander": "^2.17.1",
     "download-git-repo": "^1.1.0",
     "figlet": "^1.2.0",
+    "fs-extra": "^7.0.0",
     "handlebars": "^4.0.11",
     "inquirer": "^6.2.0",
     "log-symbols": "^2.2.0",
