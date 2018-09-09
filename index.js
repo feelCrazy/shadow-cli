@@ -9,6 +9,8 @@ const shell = require('shelljs')
 const program = require('commander')
 const fs = require('fs')
 const symbols = require('log-symbols')
+const home = require('user-home')
+const path = require('path')
 
 const Creator = require('./lib/Creator')
 
@@ -52,7 +54,18 @@ program
     .option('-p, --peper', 'test1')
     .action((packageName, options) => {
         if (!fs.existsSync(packageName)) {
-            const create = new Creator(packageName)
+            // console.log('<<<<', home)
+            const template = program.args[0]
+            const tmp = path.join(
+                home,
+                '.react-templates',
+                template.replace(/[\/:]/g, '-')
+            )
+            // console.log('>>>', tmp)
+            if (fs.existsSync(tmp)) rm(tmp)
+            // console.log(program.args)
+
+            const create = new Creator(packageName, tmp)
             create.create()
         } else {
             console.log(
