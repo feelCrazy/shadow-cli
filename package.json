@@ -1,24 +1,30 @@
 {
-  "name": "shadow-cli",
-  "version": "0.0.1",
-  "description": "test cli",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
-  },
-  "keywords": [
-    "node"
-  ],
-  "author": "ming",
-  "license": "MIT",
-  "dependencies": {
-    "chalk": "^2.4.1",
-    "figlet": "^1.2.0",
-    "inquirer": "^6.2.0",
-    "shelljs": "^0.8.2"
-  },
-  "bin": {
-    "shadow": "./index.js"
-  }
+    "name": "shadow-cli",
+    "version": "0.0.1",
+    "description": "test cli",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "node index.js"
+    },
+    "keywords": [
+        "node"
+    ],
+    "author": "ming",
+    "license": "MIT",
+    "dependencies": {
+        "chalk": "^2.4.1",
+        "commander": "^2.17.1",
+        "download-git-repo": "^1.1.0",
+        "figlet": "^1.2.0",
+        "fs-extra": "^7.0.0",
+        "handlebars": "^4.0.11",
+        "inquirer": "^6.2.0",
+        "log-symbols": "^2.2.0",
+        "ora": "^3.0.0",
+        "shelljs": "^0.8.2"
+    },
+    "bin": {
+        "shadow": "./index.js"
+    }
 }
