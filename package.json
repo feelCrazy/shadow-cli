@@ -18,7 +18,7 @@
         "download-git-repo": "^2.0.0",
         "figlet": "^1.2.3",
         "fs-extra": "^8.1.0",
-        "handlebars": "^4.1.2",
+        "handlebars": "^4.5.3",
         "inquirer": "^6.4.1",
         "log-symbols": "^3.0.0",
         "ora": "^3.4.0",
